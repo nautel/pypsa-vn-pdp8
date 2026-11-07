@@ -11,7 +11,7 @@ inter-regional transmission in a 30-region [PyPSA](https://pypsa.org) model unde
 operating-reserve and SNSP constraints, attributes the cost gap to the plan's components with Shapley values, and tests
 robustness with sensitivities, a Monte Carlo analysis, near-optimal (MGA) runs, ten weather years and stress futures.
 
-Processed input data, all results and the paper assets are archived on Zenodo: **DOI: [to be added]**.
+Processed input data, all results and the paper assets are archived on Zenodo: **DOI: [10.5281/zenodo.24037834](https://doi.org/10.5281/zenodo.24037834)** (access on request until publication).
 
 ## Repository structure
 
