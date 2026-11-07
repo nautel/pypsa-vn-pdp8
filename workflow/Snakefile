@@ -1,6 +1,6 @@
 # PyPSA-VN-PDP8: planned versus least-cost power system for Vietnam
 #
-#   snakemake -j1 paper_assets            figures and numbers of the paper from the archived run set
+#   snakemake -j1 make_summary            figures, tables and key indicators from the archived run set
 #   snakemake -j4 solve_all               re-run all 289 model runs (dependencies resolved automatically)
 #   snakemake -j1 <data>/expansion/results_v6/2035_opt_vn_summary.json      one run
 #   snakemake -j1 build_inputs            rebuild the 30-region inputs (downloads; see README)
@@ -25,7 +25,7 @@ for key, path in config.get("external", {}).items():
     os.environ[key.upper()] = str(Path(path).resolve())
 
 sys.path.insert(0, str(SCRIPTS))
-import run_set  # noqa: E402  run set of the paper (settings and dependencies of every run)
+import run_set  # noqa: E402  run set: settings and dependencies of every run
 
 RUNS = {run_set.name(j): j for j in run_set.jobs}
 
@@ -43,4 +43,4 @@ include: "rules/postprocess.smk"
 rule all:
     default_target: True
     input:
-        rules.paper_assets.output,
+        rules.make_summary.output,

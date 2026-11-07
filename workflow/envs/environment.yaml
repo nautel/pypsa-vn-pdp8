@@ -1,5 +1,5 @@
 name: pypsa-vn-pdp8
-# versions used for the paper (tested); newer versions may work
+# versions used for the archived results (tested); newer versions may work
 channels:
   - conda-forge
   - bioconda

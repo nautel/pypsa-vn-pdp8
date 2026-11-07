@@ -2,13 +2,13 @@
 
 # processed inputs and results (unpack the Zenodo archives here); exported to the scripts as VN_DATA
 data: ../data
-# run set of the paper: <data>/expansion/<results>/<run>{.nc,_summary.json}
+# run set (all scenarios and analyses): <data>/expansion/<results>/<run>{.nc,_summary.json}
 results: results_v6
-# figures, tables and number macros of the paper
-paper_assets: ../results/paper
+# summary of the run set: figures, tables and key indicators
+summary: ../results/summary
 
 solver:
-  name: gurobi   # gurobi (used for the paper) or highs (open source, much slower)
+  name: gurobi   # gurobi (used for the archived results) or highs (open source, much slower)
   threads: 4     # solver threads per run
 
 # only needed to rebuild the 2024 nodal network from raw data (rules in build_network.smk)

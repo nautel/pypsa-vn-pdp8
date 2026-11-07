@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Run set of the paper: every model run with its settings and dependencies (289 runs).
+"""Run set: every model run (scenarios, sensitivities, attribution, near-optimal space, Monte Carlo, adequacy and
+regret) with its settings and dependencies (289 runs).
 
 Importable without side effects except creating the results directory and the Monte Carlo sample file:
 `jobs` is a list of (year, scenario, tag, env, deps) and `name(job)` the run name

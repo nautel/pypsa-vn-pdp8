@@ -94,7 +94,7 @@ for y in [2035, 2040]:
 T = pd.DataFrame(rows).round(2)
 T.to_csv(OUT / "scenario_matrix.csv", index=False)
 pd.DataFrame({f"{y}|{lab.replace('$_2$', '2')}": v for (y, lab), v in stacks.items()}).T.round(3).to_csv(
-    OUT / "scenario_matrix_stacks.csv")  # USD/MWh by technology group (paper figure insets)
+    OUT / "scenario_matrix_stacks.csv")  # USD/MWh by technology group (figure insets)
 print(T[["year", "scenario", "total_bnUSD_yr", "avg_cost_USD_MWh", "co2_Mt", "co2_shadow_USD_t", "overnight_bnUSD"]]
       .to_string(index=False))
 

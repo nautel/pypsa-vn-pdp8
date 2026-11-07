@@ -12,7 +12,9 @@ plan, Decision 1509/QĐ-BCT) with a **least-cost system** for 2035 and 2040. Bot
 adequacy, operating-reserve and inverter-share constraints. The gap between them is attributed to the plan's
 components with Shapley values and tested with near-optimal, Monte Carlo, weather-year and stress-test analyses.
 
-The workflow reproduces every number, table and figure of the paper
+The workflow builds the model from open data, solves the plan and the least-cost system together with all
+scenarios, sensitivities and analyses (289 runs), and summarises the results in figures, tables and key indicators.
+The study is described in
 
 > T. Le, H. C. Vu, M. Q. Duong, *Planned versus least-cost: Vietnam's power system and the revised Power Development
 > Plan VIII*, submitted to Applied Energy (2026).
@@ -72,11 +74,11 @@ The workflow is written in [Snakemake](https://snakemake.github.io) (`workflow/`
 |---|---|
 | `rules/build_network.smk` | 2024 nodal model from raw data and its benchmark against observed operation |
 | `rules/build_inputs.smk` | inputs of the 30-region model: clustering, land eligibility and VRE profiles, weather years, the plan's projects, costs |
-| `rules/solve.smk` | the 289 model runs of the paper; settings and dependencies of every run in `scripts/run_set.py` |
-| `rules/postprocess.smk` | analyses, figures, tables and number macros of the paper |
+| `rules/solve.smk` | the 289 model runs (scenarios, sensitivities and analyses); settings and dependencies of every run in `scripts/run_set.py` |
+| `rules/postprocess.smk` | summary of the run set: figures, tables and key indicators |
 
-The processed inputs (steps 2 and 3) and all results (step 4) are archived on Zenodo, so that the paper can be
-reproduced without the raw data.
+The processed inputs (steps 2 and 3) and all results (step 4) are archived on Zenodo, so that the results can be
+used and the summary rebuilt without the raw data.
 
 ## Installation
 
@@ -87,7 +89,7 @@ conda env create -f workflow/envs/environment.yaml
 conda activate pypsa-vn-pdp8
 ```
 
-The runs of the paper used Gurobi 13 (barrier without crossover, relative tolerance 1e-4; free academic licences are
+The archived runs were solved with Gurobi 13 (barrier without crossover, relative tolerance 1e-4; free academic licences are
 available). The open-source solver HiGHS can be selected in the configuration (`solver: {name: highs}`), but a run
 then takes hours instead of minutes.
 
@@ -102,7 +104,7 @@ then takes hours instead of minutes.
 
 ```bash
 cd workflow
-snakemake -j1 paper_assets      # figures, tables and numbers of the paper from the archived runs (~10 min)
+snakemake -j1 make_summary      # figures, tables and key indicators from the archived runs (~10 min)
 snakemake -j4 solve_all         # run the model runs that are missing (all 289 in an empty results directory)
 
 # one run into a separate results directory (its dependencies are run first)
@@ -110,19 +112,55 @@ snakemake -j4 ../data/expansion/my_runs/2035_opt_vn_summary.json --config result
 ```
 
 With Gurobi and four threads per run, a typical run takes a few minutes (median 6 min, longest about 2 h); the full
-set of 289 runs takes about 30 job-hours. Run names follow `<year>_<scenario><tag>` with scenario `pdp8` (the plan)
-or `opt` (least cost); the tags are defined in `workflow/scripts/run_set.py`. Results are written to
-`data/expansion/<results>/` and the paper assets to `results/paper/`.
+set of 289 runs takes about 30 job-hours.
 
 All settings are in `workflow/config/config.default.yaml`:
 
 | Key | Meaning |
 |---|---|
 | `data` | directory of the processed inputs and results (`VN_DATA`) |
-| `results` | sub-directory of the run set (`results_v6` = runs of the paper) |
-| `paper_assets` | output directory of figures, tables and `numbers.tex` |
+| `results` | sub-directory of the run set (`results_v6` = archived run set) |
+| `summary` | output directory of figures, tables and key indicators |
 | `solver` | `name` (`gurobi` or `highs`) and `threads` per run |
 | `external` | data from other repositories, needed only to rebuild the nodal model |
+
+## Outputs
+
+| Path | Content |
+|---|---|
+| `data/expansion/<results>/<run>.nc` | optimised PyPSA network: capacities, dispatch, storage, flows and prices in every (three-hourly) time step |
+| `data/expansion/<results>/<run>_summary.json` | demand, total cost by component, investment, capacity and energy by technology, CO<sub>2</sub>, transmission added, adequacy indicators |
+| `results/summary/key_indicators.csv` | all reported indicators (costs and savings, capacities, emissions, attribution, robustness) |
+| `results/summary/figures/` | figures; `figures/gen/*.csv` hold the tables behind them (scenario costs, sensitivities, Shapley values, Monte Carlo, regret, ...) |
+| `results/summary/tab_*.tex` | LaTeX rows of the cost, capacity, regret and near-optimal tables |
+
+```python
+import json, pypsa
+
+summary = json.load(open("data/expansion/results_v6/2035_opt_vn_summary.json"))
+print(summary["cost_bnUSD_per_year"]["total_excl_VOLL"], summary["capacity_GW"]["solar"])
+
+n = pypsa.Network("data/expansion/results_v6/2035_opt_vn.nc")
+print(n.statistics.optimal_capacity())
+```
+
+Run names follow `<year>_<scenario><tag>`, with scenario `pdp8` (the plan, capacities fixed) or `opt` (least cost):
+
+| Tag | Run |
+|---|---|
+| `_vn` | central case |
+| `_vn_co2plan`, `_vn_co2half`, `_vn_co2zero*` | emission ceiling of the plan, half the plan's emissions, zero emissions |
+| `_vn_high`, `_vn_planrange`, `_vn_prgrid` | high variant of the plan; least cost within the plan's ranges (optimised or the plan's lines) |
+| `_vn_lngqc`, `_vn_dc`, `_vn_hsr`, `_vn_dchsr` | LNG take-or-pay; additional loads of data centres and high-speed rail |
+| `_vn_rel_<groups>`, `_vn_first_*`, `_vn_last_*`, `_vn_ceil_*` | attribution: groups of the plan released to optimisation |
+| `_vn_mga*_<component>` | near-optimal space: maximum capacity of a component at 2, 5 or 10% extra cost |
+| `_vn_mc<i>` | Monte Carlo samples |
+| `_vn_<sensitivity>` | one-at-a-time sensitivities (for example `_vn_pv55`, `_vn_wacc10`, `_vn_dry`) |
+| `_vn_fix_w<year>[d]` | adequacy: fixed 2035 portfolio dispatched in weather year `<year>` (`d`: dry hydrology) |
+| `<portfolio>_rg_<future>` | regret: fixed portfolio under a stress future |
+| `_bench*` (2024) | benchmark of the 30-region model against 2024 operation |
+
+All settings of every run are in `workflow/scripts/run_set.py`.
 
 ### Rebuilding the inputs from raw data
 

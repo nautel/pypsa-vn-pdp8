@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
-"""Figures and number macros of the paper.
+"""Summary of the run set: figures, tables and key indicators.
 
-Run (or `snakemake paper_assets` in workflow/):
-  RES_DIR=<DATA>/expansion/results_v6 python workflow/scripts/make_paper_assets.py <output-dir>
-Writes into <paper>/figures/ and <paper>/numbers.tex (macros \\R{key}); re-run after new model runs to refresh every
-number and figure in the text. Uses the analysis scripts in workflow/scripts/ (scenario_matrix, sensitivity_table,
-extra_load_analysis, congestion) with RES_DIR / FIG_DIR / NUMFMT=en, plus three new figures:
-  fig_mix.png       capacity and generation by scenario (2035, 2040)
-  fig_maps.png      regional capacity (pies) and inter-regional transmission, PDP8 vs least cost
-  fig_diurnal.png   mean diurnal national dispatch, April and August 2035, PDP8 vs least cost
+Reads the optimised networks and run summaries of the run set (RES_DIR) and runs the analysis scripts in
+workflow/scripts/ (scenario_matrix, sensitivity_table, extra_load_analysis, congestion, shapley, robustness_tables,
+benchmark_2024, adequacy_margin). Writes into <output-dir>:
+  key_indicators.csv   all reported indicators (costs and savings, capacities, emissions, attribution, robustness),
+                       rounded as reported
+  key_indicators.tex   the same values as LaTeX macros \\R{key}
+  tab_*.tex            LaTeX table rows (costs, the plan's capacities, regret, near-optimal space)
+  figures/*.png        figures; figures/gen/*.csv the tables behind them
+Run (or `snakemake make_summary` in workflow/):
+  RES_DIR=<DATA>/expansion/results_v6 python workflow/scripts/make_summary.py <output-dir>
 """
 import json
 import os
@@ -31,8 +33,8 @@ HERE = Path(__file__).resolve().parent
 CODE = HERE  # all scripts in workflow/scripts
 DATA = Path(os.environ.get("VN_DATA", Path(__file__).resolve().parents[2] / "data"))
 RES = Path(os.environ.get("RES_DIR", DATA / "expansion" / "results"))
-PAPER = Path(sys.argv[1])
-FIG = PAPER / "figures"
+SUMMARY = Path(sys.argv[1])
+FIG = SUMMARY / "figures"
 GEN = FIG / "gen"
 GEN.mkdir(parents=True, exist_ok=True)
 PY = sys.executable
@@ -60,7 +62,7 @@ def summ(y, s, t):
     return json.loads(f.read_text()) if f.exists() else None
 
 
-# ---------------- 1. existing analysis scripts (English number format, paper figure dir) ----------------
+# ---------------- 1. analysis scripts (English number format, summary figure dir) ----------------
 env = dict(os.environ, RES_DIR=str(RES), FIG_DIR=str(GEN), NUMFMT="en", MPLBACKEND="Agg", PALETTE="pypsa")
 for scr in ["scenario_matrix.py", "sensitivity_table.py", "extra_load_analysis.py", "congestion.py", "shapley.py",
             "robustness_tables.py", "benchmark_2024.py", "adequacy_margin.py"]:
@@ -831,7 +833,7 @@ if (GEN / "adequacy.csv").exists():
 RG = pd.read_csv(GEN / "regret.csv") if (GEN / "regret.csv").exists() else pd.DataFrame()
 PK = ["pdp8", "lc", "lcrange", "lcceil", "prgrid"]
 if not (len(RG) and all(f"{k}_cost" in RG for k in PK) and RG[[f"{k}_cost" for k in PK]].notna().all().all()):
-    (PAPER / "tab_regret_rows.tex").write_text("\\textcolor{gray}{[pending]} & & & & & & \\\\\n")
+    (SUMMARY / "tab_regret_rows.tex").write_text("\\textcolor{gray}{[pending]} & & & & & & \\\\\n")
 if len(RG) and all(f"{k}_cost" in RG for k in PK) and RG[[f"{k}_cost" for k in PK]].notna().all().all():
     RGL = {"ref": "Reference (2024 weather)", "dem": "Demand +11\\,\\%", "lng": "LNG 25\\,USD/MMBtu",
            "dry": "Dry year (80\\,TWh hydro)", "pv": "Half of the new PV built", "coal": "Coal price +50\\,\\%",
@@ -851,13 +853,13 @@ if len(RG) and all(f"{k}_cost" in RG for k in PK) and RG[[f"{k}_cost" for k in P
     rows_.append("\\midrule Maximum regret & " + " & ".join(f"{mxr[k]:.1f}" for k in PK) + " & \\\\")
     for k in PK:
         put(f"regmax_{k}", mxr[k], 1)
-    (PAPER / "tab_regret_rows.tex").write_text("\n".join(rows_) + "\n")
+    (SUMMARY / "tab_regret_rows.tex").write_text("\n".join(rows_) + "\n")
 MG = pd.read_csv(GEN / "mga.csv") if (GEN / "mga.csv").exists() else pd.DataFrame()
 if len(MG):
     ML = {"offwind": "Offshore wind [GW]", "lng": "LNG-fired CCGT [GW]", "nuclear": "Nuclear [GW]",
           "ac": "Inter-regional AC [TW\\,km]"}
     fmt_ = lambda r, c: f"{r[c]:.1f}" if c in r and not pd.isna(r[c]) else "--"  # noqa: E731
-    (PAPER / "tab_mga_rows.tex").write_text("\n".join(
+    (SUMMARY / "tab_mga_rows.tex").write_text("\n".join(
         f"{ML[r.group]} & {r.least_cost:.1f} & {fmt_(r, 'max_2pct')} & {fmt_(r, 'max_5pct')} & {fmt_(r, 'max_10pct')} & "
         f"{r.pdp8:.1f} \\\\" for _, r in MG.iterrows()) + "\n")
     for _, r in MG.iterrows():
@@ -991,7 +993,7 @@ for lab, t, fuel_lab, cf_ in [("Utility PV", "solar", "--", cf_pv), ("Onshore wi
         put("lcoe_pv", _fix(t, cf_) + mc_, 0)
     if t == "nuclear":
         put("lcoe_nuc", _fix(t, cf_) + mc_, 0)
-(PAPER / "tab_lcoe_rows.tex").write_text("\n".join(r_.replace(" & 0.00 & 0.00 &", " & -- & -- &") for r_ in rows_) + "\n")
+(SUMMARY / "tab_lcoe_rows.tex").write_text("\n".join(r_.replace(" & 0.00 & 0.00 &", " & -- & -- &") for r_ in rows_) + "\n")
 # ---------------- 11. combined main-text figures ----------------
 if (GEN / "shapley_2035.csv").exists() and len(MG):
     SH2 = pd.read_csv(GEN / "shapley_2035.csv").set_index("group").reindex(list(GK))
@@ -1097,7 +1099,7 @@ for lab, t, cf_lab in [("Utility PV", "solar", "pv"), ("Onshore wind", "onwind",
     lc_ = f"{_fix(t, cfv) + mc_:.0f} ({cfv:.2f})" if (cfv and r_.capex_usd_kw > 0) else "--"
     rows_.append(f"{lab} & {capex} & {fom} & {life} & {eff} & {fuel} & {mc_:.0f} & {lc_} \\\\")
 rows_.append(f"500\\,kV AC line [USD/(MW\\,km)] & {cc6.loc['HVAC_line', 'capex_usd_kw']:.0f} & 2.0 & 50 & -- & -- & -- & -- \\\\")
-(PAPER / "tab_cost_rows.tex").write_text("\n".join(rows_) + "\n")
+(SUMMARY / "tab_cost_rows.tex").write_text("\n".join(rows_) + "\n")
 # documented PDP8 capacity vector: table from the PDP8 runs, low (base) and high variants
 PT = {"solar": "Solar PV incl. rooftop", "onwind": "Onshore wind", "offwind": "Offshore wind", "LNG": "LNG-fired CCGT",
       "gas": "Domestic gas", "coal": "Coal", "nuclear": "Nuclear", "hydro": "Hydropower", "PHS": "Pumped hydro",
@@ -1115,12 +1117,13 @@ if all(runs_.values()):
         rows_.append(lab + " & " + " & ".join(vals) + r" \\")
     for c, lab in [("demand_TWh", "Demand [TWh]"), ("pmax_GW", "Peak demand [GW]")]:
         rows_.append(lab + " & " + " & ".join(f"{runs_[cc][c]:.0f}" for cc in cols_) + r" \\")
-    (PAPER / "tab_pdp8_rows.tex").write_text("\n".join(rows_) + "\n")
-lines = ["% generated by workflow/scripts/make_paper_assets.py -- do not edit",
+    (SUMMARY / "tab_pdp8_rows.tex").write_text("\n".join(rows_) + "\n")
+lines = ["% key indicators, generated by workflow/scripts/make_summary.py -- do not edit",
          f"% results: {RES}",
          r"\newcommand{\R}[1]{\ifcsname r@#1\endcsname\csname r@#1\endcsname\else\textcolor{gray}{[pending]}\fi}",
          r"\newcommand{\provisional}{" + ("Provisional numbers from model run set " + RES.name.replace("_", "-") +
                                            "; final results pending." if PROVISIONAL else "") + "}"]
 lines += [rf"\expandafter\def\csname r@{k}\endcsname{{{v}}}" for k, v in sorted(M.items())]
-(PAPER / "numbers.tex").write_text("\n".join(lines) + "\n")
-print(f"{len(M)} macros ->", PAPER / "numbers.tex")
+(SUMMARY / "key_indicators.tex").write_text("\n".join(lines) + "\n")
+pd.Series(M, name="value").rename_axis("key").sort_index().to_csv(SUMMARY / "key_indicators.csv")
+print(f"{len(M)} key indicators ->", SUMMARY / "key_indicators.csv")

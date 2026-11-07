@@ -1,13 +1,13 @@
-# Analyses, figures, tables and number macros of the paper
+# Summary of the run set: figures, tables and key indicators
 
 
-rule paper_assets:
+rule make_summary:
     input:
         rules.solve_all.input,
     output:
-        numbers=f"{config['paper_assets']}/numbers.tex",
-        figures=directory(f"{config['paper_assets']}/figures"),
+        indicators=f"{config['summary']}/key_indicators.csv",
+        figures=directory(f"{config['summary']}/figures"),
     log:
-        "logs/paper_assets.log",
+        "logs/make_summary.log",
     shell:
-        "RES_DIR={RES:q} python -W ignore {SCRIPTS:q}/make_paper_assets.py {config[paper_assets]:q} > {log} 2>&1"
+        "RES_DIR={RES:q} python -W ignore {SCRIPTS:q}/make_summary.py {config[summary]:q} > {log} 2>&1"

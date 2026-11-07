@@ -1,4 +1,4 @@
-# Capacity expansion and dispatch runs of the paper (scripts/model.py, settings in scripts/run_set.py)
+# Capacity expansion and dispatch runs (scripts/model.py; run set in scripts/run_set.py)
 
 
 def run_dependencies(wildcards):

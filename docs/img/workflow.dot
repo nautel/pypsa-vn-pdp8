@@ -21,8 +21,8 @@ digraph G {
   subgraph cluster_solve { label="4  Model runs\nsolve.smk · run_set.py"; fontcolor="#2e3740"; style="rounded,filled"; fillcolor="#eef3f9"; color="#4a6f96";
     solve [label="solve  ×289\n\nplan (PDP8) and least cost\n2035 · 2040\n\nShapley attribution\nnear-optimal space\nMonte Carlo · weather years\nstress futures (regret)", fillcolor="#e3ecf6", color="#4a6f96", penwidth=1.5, width=2.7];
   }
-  subgraph cluster_post { label="5  Paper\npostprocess.smk"; fontcolor="#2e3740"; style="rounded,filled"; fillcolor="#eef3f9"; color="#4a6f96";
-    assets [label="paper_assets\n\nfigures · tables\nnumbers.tex", fillcolor="#e3ecf6", color="#4a6f96", penwidth=1.5, width=2.0];
+  subgraph cluster_post { label="5  Results summary\npostprocess.smk"; fontcolor="#2e3740"; style="rounded,filled"; fillcolor="#eef3f9"; color="#4a6f96";
+    assets [label="make_summary\n\nfigures · tables\nkey indicators", fillcolor="#e3ecf6", color="#4a6f96", penwidth=1.5, width=2.0];
   }
   zen [shape=note, label="Zenodo archive: processed inputs (2, 3)\nand all 289 runs (4) — start from here", fillcolor="#fff8e6", color="#c9a227", fontsize=10, width=3.2];
 

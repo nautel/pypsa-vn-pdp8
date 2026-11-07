@@ -60,7 +60,7 @@ VN = gpd.read_file(DATA / "shapes" / "gadm41_VNM_1.json")
 EXT = (101.8, 110.4, 8.2, 23.6)
 
 
-# PyPSA-Eur / PyPSA-DE technology colours (pypsa-de/config/plotting.default.yaml), used for paper figures
+# PyPSA-Eur / PyPSA-DE technology colours (pypsa-de/config/plotting.default.yaml), used for the result figures
 # (PALETTE=pypsa); same colour = same technology in every figure
 PYPSA_COLORS = {"Coal": "#545454", "Gas": "#e05b09", "Nuclear": "#ff8c00", "Hydro": "#298c81",
                 "Imports & biomass": "#baa741", "Other": "#baa741", "Onshore wind": "#235ebc",
@@ -71,7 +71,7 @@ PALETTE = os.environ.get("PALETTE", "")
 
 
 def vnum(x, d=0):
-    """number format: Vietnamese (1.234,5) by default; NUMFMT=en -> English (1,234.5) for the paper figures."""
+    """number format: Vietnamese (1.234,5) by default; NUMFMT=en -> English (1,234.5)."""
     if os.environ.get("NUMFMT") == "en":
         return f"{x:,.{d}f}"
     return f"{x:,.{d}f}".replace(",", "_").replace(".", ",").replace("_", ".")
