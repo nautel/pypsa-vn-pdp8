@@ -1,0 +1,46 @@
+# PyPSA-VN-PDP8: planned versus least-cost power system for Vietnam
+#
+#   snakemake -j1 paper_assets            figures and numbers of the paper from the archived run set
+#   snakemake -j4 solve_all               re-run all 289 model runs (dependencies resolved automatically)
+#   snakemake -j1 <data>/expansion/results_v6/2035_opt_vn_summary.json      one run
+#   snakemake -j1 build_inputs            rebuild the 30-region inputs (downloads; see README)
+#   snakemake -j1 build_network_2024      rebuild the 2024 nodal model and its benchmark from raw data
+import os
+import re
+import shlex
+import sys
+from pathlib import Path
+
+
+configfile: "config/config.default.yaml"
+
+
+DATA = Path(config["data"]).resolve()
+EXP = DATA / "expansion"
+RES = EXP / config["results"]
+SCRIPTS = Path(workflow.basedir) / "scripts"
+os.environ["VN_DATA"] = str(DATA)
+os.environ["RES_SUB"] = config["results"]
+for key, path in config.get("external", {}).items():
+    os.environ[key.upper()] = str(Path(path).resolve())
+
+sys.path.insert(0, str(SCRIPTS))
+import run_set  # noqa: E402  run set of the paper (settings and dependencies of every run)
+
+RUNS = {run_set.name(j): j for j in run_set.jobs}
+
+
+wildcard_constraints:
+    run="|".join(re.escape(r) for r in RUNS),
+
+
+include: "rules/build_network.smk"
+include: "rules/build_inputs.smk"
+include: "rules/solve.smk"
+include: "rules/postprocess.smk"
+
+
+rule all:
+    default_target: True
+    input:
+        rules.paper_assets.output,

@@ -1,1 +1,1 @@
-Place the unpacked Zenodo archives here (or set VN_DATA). See ../README.md.
+Unpack the Zenodo archives (inputs and results) here and add the GADM shapes; see ../README.md (Usage).

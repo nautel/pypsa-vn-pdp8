@@ -1,0 +1,17 @@
+# PyPSA-VN-PDP8 workflow configuration (paths relative to workflow/)
+
+# processed inputs and results (unpack the Zenodo archives here); exported to the scripts as VN_DATA
+data: ../data
+# run set of the paper: <data>/expansion/<results>/<run>{.nc,_summary.json}
+results: results_v6
+# figures, tables and number macros of the paper
+paper_assets: ../results/paper
+
+solver:
+  name: gurobi   # gurobi (used for the paper) or highs (open source, much slower)
+  threads: 4     # solver threads per run
+
+# only needed to rebuild the 2024 nodal network from raw data (rules in build_network.smk)
+external:
+  vietnamgrid_dir: ../../vietnamgrid               # hourly load shape and bus coordinates (D-13)
+  pypsa_vn_file: ../../pypsa-vn/vietnam_era5.nc    # hydro inflow per bus 2015-2016 (D-15)

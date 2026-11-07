@@ -1,0 +1,36 @@
+digraph G {
+  graph [rankdir=LR, compound=true, newrank=true, fontname="Helvetica", fontsize=14, nodesep=0.18, ranksep=0.55, bgcolor="white", pad=0.3, labeljust=l];
+  node  [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=11, color="#7a8794", fillcolor="#f4f6f8", width=2.5, margin="0.12,0.06"];
+  edge  [color="#5b6670", arrowsize=0.7, penwidth=1.3];
+
+  subgraph cluster_raw { label="1  Raw data"; fontcolor="#2e3740"; style="rounded,filled"; fillcolor="#fbfbfc"; color="#c5ccd3";
+    {rank=same; osm [label="OpenStreetMap grid\n500/220/110 kV", fillcolor="white"];
+    gem [label="Global Energy Monitor\npower plants", fillcolor="white"];
+    era5 [label="ERA5 · Global Wind Atlas", fillcolor="white"];
+    gis [label="WorldCover · DEM · WDPA", fillcolor="white"];
+    plan [label="Decisions 768 / 1509\n(PDP8)", fillcolor="white"];
+    obs [label="Ember · EVN\n2024 operation", fillcolor="white"];}
+  }
+  subgraph cluster_nodal { label="2  2024 nodal model\nbuild_network.smk"; fontcolor="#2e3740"; style="rounded,filled"; fillcolor="#fbfbfc"; color="#c5ccd3";
+    {rank=same; topo [label="build_topology"]; plants [label="build_plants"]; net [label="build_network\n2,175 buses"]; bench [label="validate_2024\nbenchmark vs. 2024"];}
+  }
+  subgraph cluster_inputs { label="3  30-region inputs\nbuild_inputs.smk"; fontcolor="#2e3740"; style="rounded,filled"; fillcolor="#fbfbfc"; color="#c5ccd3";
+    {rank=same; clus [label="cluster_network\n30 regions · corridors"]; vre [label="vre_potentials\neligible land · profiles"];
+    wy [label="weather_years\n2015–2023"]; ps [label="plan_sources · geocode_plan\nplan's projects and lines"]; costs [label="costs\nTechnology Catalogue 2026"];}
+  }
+  subgraph cluster_solve { label="4  Model runs\nsolve.smk · run_set.py"; fontcolor="#2e3740"; style="rounded,filled"; fillcolor="#eef3f9"; color="#4a6f96";
+    solve [label="solve  ×289\n\nplan (PDP8) and least cost\n2035 · 2040\n\nShapley attribution\nnear-optimal space\nMonte Carlo · weather years\nstress futures (regret)", fillcolor="#e3ecf6", color="#4a6f96", penwidth=1.5, width=2.7];
+  }
+  subgraph cluster_post { label="5  Paper\npostprocess.smk"; fontcolor="#2e3740"; style="rounded,filled"; fillcolor="#eef3f9"; color="#4a6f96";
+    assets [label="paper_assets\n\nfigures · tables\nnumbers.tex", fillcolor="#e3ecf6", color="#4a6f96", penwidth=1.5, width=2.0];
+  }
+  zen [shape=note, label="Zenodo archive: processed inputs (2, 3)\nand all 289 runs (4) — start from here", fillcolor="#fff8e6", color="#c9a227", fontsize=10, width=3.2];
+
+  gem -> net [ltail=cluster_raw, lhead=cluster_nodal];
+  net -> vre [ltail=cluster_nodal, lhead=cluster_inputs];
+  plan -> wy [ltail=cluster_raw, lhead=cluster_inputs, style=invis];
+  vre -> solve [ltail=cluster_inputs, lhead=cluster_solve];
+  solve -> assets [ltail=cluster_solve, lhead=cluster_post];
+  {rank=same; solve; zen}
+  solve -> zen [style=invis];
+}

@@ -6,3 +6,6 @@ results*/
 *.nc
 *.log
 .ipynb_checkpoints/
+.snakemake/
+workflow/logs/
+results/
