@@ -1,0 +1,22 @@
+tech,capex_usd_kw,fom_pct,life,eff,fuel_usd_mwhth,vom_usd_mwh,co2_t_mwhth,source
+solar,400.0,2.5,30.0,0.0,0.0,0.0,0.0,Utility PV 2035: PyPSA technology-data v0.9.2 (DEA) 352 EUR/kW ~380 USD; AEO8 970 USD/kW x (1-0.68 decline 2035)=310; mid value 400 (ASSUMPTION)
+onwind,1209.0,2.5,25.0,0.0,0.0,1.5,0.0,AEO8 D15 Wind Onshore 1570 USD/kW x (1-0.23 D17 decline 2035)
+offwind,3010.0,2.3,25.0,0.0,0.0,0.0,0.0,AEO8 D15 Wind Offshore 3390 x (1-0.23) = 2610 + grid connection 400 USD/kW (ASSUMPTION)
+CCGT,918.0,3.2,25.0,0.58,62.9,2.2,0.198,"AEO8 D15 Gas Combined Cycle 918 USD/kW, FOM 29.2 USD/kW-y; FUEL: S15 MOIT 2025 gas-power price framework: LNG import 14.05 + transport/storage/regas 2.589 USD/MMBtu (HHV) = 16.64 USD/MMBtu -> x3.412 x1.108 (HHV->LHV) = 62.9 USD/MWh_th LHV; eff from D-20 is LHV"
+OCGT,616.0,3.7,25.0,0.38,62.9,3.6,0.198,AEO8 D15 Gas Turbine 616 USD/kW; FUEL: S15 MOIT 2025 gas-power price framework: LNG import 14.05 + transport/storage/regas 2.589 USD/MMBtu (HHV) = 16.64 USD/MMBtu -> x3.412 x1.108 (HHV->LHV) = 62.9 USD/MWh_th LHV; eff from D-20 is LHV
+nuclear,9000.0,0.84,60.0,0.33,4.0,5.1,0.0,"AEO8 D15 Nuclear LWR 9000 USD/kW, FOM 75.3 USD/kW-y; fuel ~4 USD/MWh_th (ASSUMPTION)"
+battery_4h,710.0,1.5,15.0,0.0,0.0,0.0,0.0,"tech-data 2035: battery storage 125 EUR/kWh x4 + inverter 138 EUR/kW, x1.08 USD/EUR ~ 680 -> 710 USD/kW (4 h)"
+PHS,1200.0,1.0,60.0,0.0,0.0,0.0,0.0,AEO8 D15 Pumped Hydro 950 USD/kW; tech-data 2275 EUR/kW; 1200 USD/kW (8 h) ASSUMPTION
+coal_existing,0.0,0.0,0.0,0.37,14.5,2.3,0.34,"S14 MOIT Decision 1009/QD-BCT (2025 coal-power price framework): coal 1,974,952 VND/t at HHV 4,788 kcal/kg, 25,670 VND/USD = 76.9 USD/t -> 14.5 USD/MWh_th LHV (x1.05). eff fleet 0.37 / new 0.40"
+coal_new,0.0,0.0,0.0,0.4,14.5,2.3,0.34,"S14 MOIT Decision 1009/QD-BCT (2025 coal-power price framework): coal 1,974,952 VND/t at HHV 4,788 kcal/kg, 25,670 VND/USD = 76.9 USD/t -> 14.5 USD/MWh_th LHV (x1.05). eff fleet 0.37 / new 0.40"
+gas_domestic,0.0,0.0,0.0,0.55,41.9,2.2,0.198,"domestic gas: EVN 2025 'imported LNG ~1.5x domestic gas (Phu My)' -> 16.64/1.5 = 11.1 USD/MMBtu HHV = 41.9 USD/MWh_th LHV (DERIVED ASSUMPTION, S15)"
+oil,0.0,0.0,0.0,0.33,54.0,7.3,0.257,FO ~15 USD/GJ (ASSUMPTION); VOM AEO8
+biomass,0.0,0.0,0.0,0.0,0.0,40.0,0.0,biomass/waste dispatch cost 40 USD/MWh (ASSUMPTION)
+imports,0.0,0.0,0.0,0.0,0.0,70.0,0.0,Laos/China import price ~70 USD/MWh (Laos PPAs ~6.9 USc/kWh; ASSUMPTION)
+HVAC_line,477.0,2.0,40.0,0.0,0.0,0.0,0.0,tech-data HVAC overhead 442 EUR/MW/km x1.08 (capex in USD per MW per km)
+HVDC_line,477.0,2.0,40.0,0.0,0.0,0.0,0.0,tech-data HVDC overhead 442 EUR/MW/km x1.08 (USD per MW per km)
+HVDC_converter_pair,179.0,2.0,40.0,0.0,0.0,0.0,0.0,tech-data HVDC inverter pair 165803 EUR/MW x1.08 = 179 USD/kW
+VOLL,0.0,0.0,0.0,0.0,0.0,3000.0,0.0,value of lost load USD/MWh (ASSUMPTION)
+hydro_energy,0.0,0.0,0.0,0.0,0.0,100.0,0.0,"annual hydro energy TWh in vom column (ASSUMPTION; 2022-25 Ember 81-105 TWh, more capacity)"
+AC_500_circuit_MW,0.0,0.0,0.0,0.0,0.0,2250.0,0.0,500 kV circuit rating MW in vom column (model line type 2.6 kA)
+AC_220_circuit_MW,0.0,0.0,0.0,0.0,0.0,490.0,0.0,220 kV circuit rating MW in vom column (Al/St 240/40 2-bundle)

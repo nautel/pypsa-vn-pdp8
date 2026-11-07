@@ -1,0 +1,23 @@
+tech,capex_usd_kw,fom_pct,life,eff,fuel_usd_mwhth,vom_usd_mwh,co2_t_mwhth,source
+solar,400.0,1.93,35.0,0.0,0.0,0.0,0.0,"TC2026 San xuat dien: Dien mat troi mat dat, MUSD/MW_e(AC) 0.52/0.40, FOM 8676/7715 USD/MW/yr [2040 column]"
+onwind,1540.0,2.24,30.0,0.0,0.0,0.0,0.0,"TC2026 San xuat dien: Dien gio tren bo - tua bin toc do gio thap, 1.59/1.54 MUSD/MW, FOM 35898/34534 [2040 column]"
+offwind,3690.0,3.61,30.0,0.0,0.0,0.0,0.0,"TC2026 San xuat dien: Dien gio ngoai khoi mong co dinh 4.30/3.69 MUSD/MW (incl. 15% grid connection), FOM 150500/133245 [2040 column]"
+CCGT,1120.0,3.67,50.0,0.61,62.9,2.41,0.198,"TC2026 San xuat dien: Tua bin khi chu trinh hon hop 1.14/1.12 MUSD/MW, FOM 41904/41074, VOM 2.46/2.41, eff 60/61% [2040 column]"
+OCGT,990.0,2.94,50.0,0.45,62.9,4.44,0.198,"TC2026 San xuat dien: Tua bin khi chu trinh don - he thong lon 1.01/0.99 MUSD/MW, FOM 29705/29116, VOM 4.53/4.44, eff 43/45% [2040 column]"
+nuclear,5500.0,2.15,60.0,0.4,4.0,2.2,0.0,"TC2026 San xuat dien: Dien hat nhan lo lon PWR 6.0/5.5 MUSD/MW (range 2025: 5-10), FOM 122000/118000, VOM 2.3/2.2 [2040 column]"
+battery_4h,800.0,1.0,30.0,0.959,0.0,0.0,0.0,TC2026 Luu tru-PtX: Pin Li-ion quy mo nha may 4 MWh/1 MW: 0.24/0.20 MUSD/MWh x4; RTE 92% AC; FOM row ambiguous -> 1%/yr (ASSUMPTION) [2040 column]
+PHS,750.0,1.99,50.0,0.894,0.0,1.4,0.0,"TC2026 Luu tru-PtX: Thuy dien tich nang 0.75 MUSD/MW, 5 h, RTE 80%, FOM 14960/14910, VOM 1.4 [2040 column]"
+coal_existing,0.0,0.0,0.0,0.37,14.5,2.3,0.34,"S14 MOIT Decision 1009/QD-BCT (2025 coal-power price framework): coal 1,974,952 VND/t at HHV 4,788 kcal/kg, 25,670 VND/USD = 76.9 USD/t -> 14.5 USD/MWh_th LHV (x1.05). eff fleet 0.37 / new 0.40"
+coal_new,0.0,0.0,0.0,0.4,14.5,2.3,0.34,"S14 MOIT Decision 1009/QD-BCT (2025 coal-power price framework): coal 1,974,952 VND/t at HHV 4,788 kcal/kg, 25,670 VND/USD = 76.9 USD/t -> 14.5 USD/MWh_th LHV (x1.05). eff fleet 0.37 / new 0.40"
+gas_domestic,0.0,0.0,0.0,0.55,41.9,2.2,0.198,"domestic gas: EVN 2025 'imported LNG ~1.5x domestic gas (Phu My)' -> 16.64/1.5 = 11.1 USD/MMBtu HHV = 41.9 USD/MWh_th LHV (DERIVED ASSUMPTION, S15)"
+oil,0.0,0.0,0.0,0.33,54.0,7.3,0.257,FO ~15 USD/GJ (ASSUMPTION); VOM AEO8
+biomass,0.0,0.0,0.0,0.0,0.0,40.0,0.0,biomass/waste dispatch cost 40 USD/MWh (ASSUMPTION)
+imports,0.0,0.0,0.0,0.0,0.0,70.0,0.0,Laos/China import price ~70 USD/MWh (Laos PPAs ~6.9 USc/kWh; ASSUMPTION)
+HVAC_line,184.4,2.0,50.0,0.0,0.0,0.0,0.0,TC2026 Truyen tai: DZ tren khong 500 kV AC mach kep ACSR4x330 0.89 (2035)/0.83 (2040) MUSD/km / (2x2250 MW); excl. substations; FOM 2%/yr [2040 column]
+HVDC_line,206.2,2.0,50.0,0.0,0.0,0.0,0.0,TC2026 Truyen tai: DZ tren khong DC 800 kV 1.72 (2035)/1.65 (2040) MUSD/km / 8000 MW (ASSUMPTION rating) [2040 column]
+HVDC_converter_pair,200.0,2.0,40.0,0.0,0.0,0.0,0.0,TC2026 Truyen tai: Tram DC LCC tren bo 1000-1250 MW 0.10 MUSD/MW per station (2035/2040) x2 [2040 column]
+VOLL,0.0,0.0,0.0,0.0,0.0,3000.0,0.0,value of lost load USD/MWh (ASSUMPTION)
+hydro_energy,0.0,0.0,0.0,0.0,0.0,100.0,0.0,"annual hydro energy TWh in vom column (ASSUMPTION; 2022-25 Ember 81-105 TWh, more capacity)"
+AC_500_circuit_MW,0.0,0.0,0.0,0.0,0.0,2250.0,0.0,500 kV circuit rating MW in vom column (model line type 2.6 kA)
+AC_220_circuit_MW,0.0,0.0,0.0,0.0,0.0,490.0,0.0,220 kV circuit rating MW in vom column (Al/St 240/40 2-bundle)
+PHS_max_hours,0.0,0.0,0.0,0.0,0.0,5.0,0.0,TC2026 Luu tru-PtX: thuy dien tich nang thoi gian luu tru 5 h (reservoir 6000 MWh / 1200 MW) (value in vom column)

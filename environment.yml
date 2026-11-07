@@ -1,0 +1,33 @@
+name: pypsa-vn-pdp8
+# versions used for the paper (tested); newer versions may work
+channels:
+  - conda-forge
+dependencies:
+  - python=3.13
+  - pypsa=1.2.4
+  - linopy=0.8.0
+  - highspy=1.15.1
+  - pandas=2.3.3
+  - numpy
+  - xarray
+  - dask
+  - netcdf4=1.7.4
+  - pytables
+  - scipy
+  - scikit-learn
+  - networkx
+  - geopandas=1.2.0
+  - pyogrio
+  - shapely=2.2.0
+  - pyproj=3.8.0
+  - rasterio
+  - rioxarray
+  - atlite=0.4.1
+  - matplotlib
+  - openpyxl
+  - pyyaml
+  - requests
+  - cdsapi
+  - pip
+  - pip:
+      - gurobipy==13.0.3  # optional; requires a Gurobi licence

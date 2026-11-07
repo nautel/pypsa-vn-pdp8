@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the paper and the archived release."
+title: "PyPSA-VN-PDP8: planned versus least-cost power system for Vietnam"
+version: 1.0.0
+license: MIT
+authors:
+  - family-names: Le
+    given-names: Tuan
+    affiliation: "Heudiasyc Laboratory, Université de technologie de Compiègne, France"
+  - family-names: Vu
+    given-names: Hai Canh
+    affiliation: "Roberval Laboratory, Université de technologie de Compiègne, France"
+  - family-names: Duong
+    given-names: Minh Quan
+    affiliation: "University of Da Nang - University of Science and Technology, Vietnam"
+preferred-citation:
+  type: article
+  title: "Planned versus least-cost: Vietnam's power system and the revised Power Development Plan VIII"
+  authors:
+    - family-names: Le
+      given-names: Tuan
+    - family-names: Vu
+      given-names: Hai Canh
+    - family-names: Duong
+      given-names: Minh Quan
+  journal: "Applied Energy"
+  year: 2026
+  notes: "submitted"
