@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Documentation
+    url: https://github.com/nautel/pypsa-vn-pdp8/tree/main/docs
+    about: Installation, tutorial, configuration, run set, model description and outputs.
+  - name: PyPSA
+    url: https://pypsa.org
+    about: Documentation and community of PyPSA, the modelling framework used by this model.

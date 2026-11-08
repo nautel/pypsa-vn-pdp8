@@ -280,7 +280,7 @@ load = lt.div(nat, axis=0).mul(nat2, axis=0)
 
 # optional extra loads on top of the Decision-768 forecast (which does not mention data centres or HSR):
 # EXTRA=dc  -> data centres: ~1 GW by 2030 (market outlooks) x 12.6 %/yr trend + 1-2 hyperscale AI campuses
-#              = 3 GW (2035) / 5 GW (2040) facility power, flat at 80 % utilisation (ASSUMPTIONS, DATA_SOURCES sec. 6)
+#              = 3 GW (2035) / 5 GW (2040) facility power, flat at 80 % utilisation (ASSUMPTIONS, docs/data_sources.md sec. 6)
 # EXTRA=hsr -> North-South high-speed rail (Resolution 172/2024/QH15, 1,541 km, 350 km/h): peak 350 MW (2035,
 #              initial service) / 900 MW (2040), 20 feeding points, service 6-23 h, peaks 7-9 h and 17-20 h (ASSUMPTIONS)
 EXTRA = os.environ.get("EXTRA", "")  # "", "dc", "hsr" or combined "dc+hsr"
@@ -819,7 +819,6 @@ def hydro_monthly(n_, sn_=None):
 
 
 def extra_constraints(n_, m_, gen, su, lk):
-    snaps = n_.snapshots
     if HYDRO_MONTHLY:
         hydro_monthly(n_)
     # national pumped-hydro limit: Decision 768 upper path (6.0 GW 2030 -> 21.327 GW 2050, linear; site/lead-time

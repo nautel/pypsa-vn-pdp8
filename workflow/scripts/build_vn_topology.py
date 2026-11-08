@@ -28,7 +28,7 @@ import geopandas as gpd  # noqa: E402
 import networkx as nx  # noqa: E402
 import numpy as np  # noqa: E402
 import pandas as pd  # noqa: E402
-from shapely.geometry import LineString, Point  # noqa: E402
+from shapely.geometry import Point  # noqa: E402
 
 DATA = Path(os.environ.get("VN_DATA", Path(__file__).resolve().parents[2] / "data"))
 OUT = DATA / "grid" / "topology"

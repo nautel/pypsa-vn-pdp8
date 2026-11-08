@@ -25,7 +25,7 @@ import pypsa  # noqa: E402
 from matplotlib.patches import Patch, Wedge  # noqa: E402
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from plot_vn import INK, INK2, MUTED, PALETTE, PYPSA_COLORS, SLOTS, SURF, basemap, save, vnum  # noqa: E402
+from plot_vn import INK, INK2, PALETTE, PYPSA_COLORS, SLOTS, SURF, basemap, save, vnum  # noqa: E402
 
 logging.disable(logging.WARNING)
 DATA = Path(os.environ.get("VN_DATA", Path(__file__).resolve().parents[2] / "data"))

@@ -9,3 +9,5 @@ results*/
 .snakemake/
 workflow/logs/
 results/
+docs/_build/
+.pytest_cache/

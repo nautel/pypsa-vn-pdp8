@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Vietnam 500/220/110 kV PyPSA network, validation year 2024 (end-2024 fleet).
-Source IDs (D-xx datasets, S-xx official documents) -> DATA_SOURCES.md
+Source IDs (D-xx datasets, S-xx official documents) -> docs/data_sources.md
 
 Inputs (<DATA> = external drive):
   grid/topology/{buses,lines,transformers}.csv      build_vn_topology.py (OSM)

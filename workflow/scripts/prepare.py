@@ -48,7 +48,7 @@ c = pd.DataFrame({"x": b.x, "y": b.y, "w": w, "cl": busmap})
 cl = c.groupby("cl").apply(lambda d: pd.Series({"x": np.average(d.x, weights=d.w), "y": np.average(d.y, weights=d.w)}))
 cl["region"] = np.where(cl.y > 17.9, "Bắc", np.where(cl.y > 11.5, "Trung", "Nam"))
 # offshore point: 40 km seaward of the cluster centroid (east, or south-east for the Mekong) if the cluster is coastal
-coast = gpd = None
+coast = None
 import geopandas as gpd  # noqa: E402
 
 vn = gpd.read_file(DATA / "shapes" / "gadm41_VNM_0.json").to_crs(32648)

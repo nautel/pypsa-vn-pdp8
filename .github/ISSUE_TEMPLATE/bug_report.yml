@@ -1,0 +1,32 @@
+name: Bug report
+description: Something in the workflow or the scripts does not work as documented
+labels: ["bug"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What happened, and what did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: How to reproduce
+      description: Command, target and configuration changes (for example `snakemake -j4 ... --config results=...`).
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: log
+    attributes:
+      label: Log
+      description: Relevant part of `workflow/logs/<rule>.log` or of the Snakemake output.
+      render: shell
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: Release tag or commit (`git describe --tags`), operating system, solver.
+    validations:
+      required: true

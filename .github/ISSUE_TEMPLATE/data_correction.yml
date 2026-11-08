@@ -1,0 +1,18 @@
+name: Data correction
+description: An input value (plant, line, plan target, cost, ...) is wrong or outdated
+labels: ["data"]
+body:
+  - type: textarea
+    id: value
+    attributes:
+      label: Value
+      description: Which value, in which file or script, and the source ID in docs/data_sources.md if there is one.
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: Correction and source
+      description: The correct value and its source (document, date, URL).
+    validations:
+      required: true

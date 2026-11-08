@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Parse planned transmission projects from Decision 1509/QD-BCT (30/5/2025), the MOIT implementation plan of the
-revised PDP8 (Decision 768/QD-TTg), Appendix II.2 (S10 in DATA_SOURCES.md).
+revised PDP8 (Decision 768/QD-TTg), Appendix II.2 (S10 in docs/data_sources.md).
 
 Input : <DATA>/plans/qd1509_bct_2025_caselaw.html  (full text incl. appendices, saved from caselaw.vn)
 Output: <DATA>/plans/qd1509_lines.csv, qd1509_substations.csv, qd1509_hvdc_uhv.csv

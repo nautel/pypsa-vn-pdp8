@@ -813,7 +813,7 @@ if (GEN / "adequacy.csv").exists():
                 put(f"lole_{k}{hk}_mean", a_.lole_h.mean(), 1)
                 put(f"lole_{k}{hk}_max", a_.lole_h.max(), 0)
                 put(f"adcost_{k}{hk}_mean", a_.cost_bnUSD.mean(), 1)
-                put(f"nyears_ad", a_.weather_year.nunique(), 0)
+                put("nyears_ad", a_.weather_year.nunique(), 0)
     for pf, k in [("PDP8", "pdp"), ("Least cost", "lc")]:
         put(f"eue_{k}_max", AD[AD.portfolio == pf].eue_ppm.max(), 2)
     fig, axs = plt.subplots(1, 2, figsize=(7.5, 3.0), sharey=True)

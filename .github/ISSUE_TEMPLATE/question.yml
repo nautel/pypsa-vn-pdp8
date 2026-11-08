@@ -1,0 +1,11 @@
+name: Question
+description: A question about the model, its data or its results
+labels: ["question"]
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Question
+      description: Please check the documentation (docs/) first and name the run, output or setting the question is about.
+    validations:
+      required: true

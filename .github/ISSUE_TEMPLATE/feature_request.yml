@@ -1,0 +1,16 @@
+name: Feature request
+description: A new scenario, analysis, output or improvement of the workflow
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: What should be added or changed, and why?
+    validations:
+      required: true
+  - type: textarea
+    id: implementation
+    attributes:
+      label: Implementation
+      description: Settings, runs or data needed (optional).

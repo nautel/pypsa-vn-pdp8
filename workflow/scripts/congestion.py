@@ -23,7 +23,7 @@ import pypsa  # noqa: E402
 from matplotlib.colors import Normalize  # noqa: E402
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from plot_vn import INK, MUTED, SEQ, SLOTS, basemap, save, vnum  # noqa: E402
+from plot_vn import INK, MUTED, SEQ, basemap, save  # noqa: E402
 
 logging.disable(logging.WARNING)
 DATA = Path(os.environ.get("VN_DATA", Path(__file__).resolve().parents[2] / "data"))
