@@ -6,7 +6,7 @@ The code of PyPSA-VN-PDP8 is released under the [MIT License](https://github.com
 
 ## Data
 
-The processed inputs and results on [Zenodo](https://doi.org/10.5281/zenodo.24037834) are derived from datasets with
+The processed inputs and results on [Zenodo](https://doi.org/10.5281/zenodo.24037833) are derived from datasets with
 their own licences. The main ones are:
 
 | Data | Licence |

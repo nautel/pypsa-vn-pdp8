@@ -1,5 +1,10 @@
 # Release notes
 
+## v1.2.1 (2026-11-08)
+
+- Citation corrected: the paper describing the study is in preparation and has not been submitted. Cite the archived
+  release on Zenodo (doi:10.5281/zenodo.24037833, all versions). `CITATION.cff` no longer names a journal article.
+
 ## v1.2.0 (2026-11-08)
 
 - Documentation built with Sphinx: installation, tutorial, configuration and run settings, run set, model

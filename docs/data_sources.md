@@ -1,6 +1,6 @@
 # Data sources
 
-IDs referenced in the code comments: D-xx datasets, S-xx official documents and derived parameters (descriptions in Vietnamese). The references of the paper give the bibliographic details.
+IDs referenced in the code comments: D-xx datasets, S-xx official documents and derived parameters (descriptions in Vietnamese). Each entry gives the provider, the URL and the licence of the source.
 
 ## Datasets (D)
 

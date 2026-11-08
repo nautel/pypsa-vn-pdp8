@@ -1,14 +1,14 @@
 cff-version: 1.2.0
-message: "If you use this software, please cite the paper and the archived release."
+message: "If you use this software, its data or its results, please cite it as below."
 title: "PyPSA-VN-PDP8: planned versus least-cost power system for Vietnam"
 abstract: >-
   Open capacity-expansion model of Vietnam's power system built with PyPSA and Snakemake. It compares the revised
   Power Development Plan VIII (Decisions 768/QĐ-TTg and 1509/QĐ-BCT) with a least-cost system for 2035 and 2040
   under identical adequacy and security constraints, attributes the cost gap to the plan's components with Shapley
   values, and tests it with near-optimal, Monte Carlo, weather-year and stress-test analyses.
-version: 1.2.0
+version: 1.2.1
 date-released: 2026-11-08
-doi: 10.5281/zenodo.24037834
+doi: 10.5281/zenodo.24037833
 license: MIT
 repository-code: "https://github.com/nautel/pypsa-vn-pdp8"
 keywords:
@@ -30,16 +30,3 @@ authors:
   - family-names: Duong
     given-names: Minh Quan
     affiliation: "University of Da Nang - University of Science and Technology, Vietnam"
-preferred-citation:
-  type: article
-  title: "Planned versus least-cost: Vietnam's power system and the revised Power Development Plan VIII"
-  authors:
-    - family-names: Le
-      given-names: Tuan
-    - family-names: Vu
-      given-names: Hai Canh
-    - family-names: Duong
-      given-names: Minh Quan
-  journal: "Applied Energy"
-  year: 2026
-  notes: "submitted"

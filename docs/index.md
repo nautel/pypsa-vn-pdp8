@@ -18,7 +18,7 @@ The workflow:
    analyses;
 4. summarises the results in figures, tables and key indicators.
 
-The processed inputs and all 289 solved runs are archived on [Zenodo](https://doi.org/10.5281/zenodo.24037834). The
+The processed inputs and all 289 solved runs are archived on [Zenodo](https://doi.org/10.5281/zenodo.24037833). The
 results can therefore be used, and the summary rebuilt, without the raw data or a solver.
 
 ```{toctree}

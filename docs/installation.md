@@ -28,7 +28,7 @@ With HiGHS a run takes hours instead of minutes. Building the summary from archi
 
 ## Data
 
-1. Download the archives from [Zenodo](https://doi.org/10.5281/zenodo.24037834) and unpack
+1. Download the archives from [Zenodo](https://doi.org/10.5281/zenodo.24037833) and unpack
    `pypsa-vn-pdp8-inputs-v1.0.zip` and `pypsa-vn-pdp8-results-v6.zip` into the repository root. Both create `data/`.
 2. Download the GADM 4.1 boundaries of Vietnam (levels 0–2, GeoJSON) from <https://gadm.org> into `data/shapes/`,
    and the outlines of the Paracel and Spratly Islands (`XPI`, `XSP`) into `data/shapes/islands/`. The GADM licence

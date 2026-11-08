@@ -1,8 +1,8 @@
-[![Release](https://img.shields.io/badge/release-v1.2.0-2c6bac.svg)](docs/release_notes.md)
+[![Release](https://img.shields.io/badge/release-v1.2.1-2c6bac.svg)](docs/release_notes.md)
 [![Test](https://github.com/nautel/pypsa-vn-pdp8/actions/workflows/test.yaml/badge.svg)](https://github.com/nautel/pypsa-vn-pdp8/actions/workflows/test.yaml)
 [![Documentation](https://github.com/nautel/pypsa-vn-pdp8/actions/workflows/docs.yaml/badge.svg)](https://nautel.github.io/pypsa-vn-pdp8/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24037834.svg)](https://doi.org/10.5281/zenodo.24037834)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24037833.svg)](https://doi.org/10.5281/zenodo.24037833)
 [![PyPSA](https://img.shields.io/badge/PyPSA-1.2-2c6bac.svg)](https://pypsa.org)
 [![Snakemake](https://img.shields.io/badge/snakemake-%E2%89%A59-039475.svg)](https://snakemake.github.io)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
@@ -19,7 +19,7 @@ The model-building routines form a [Snakemake](https://snakemake.github.io) work
 [PyPSA-Eur](https://github.com/PyPSA/pypsa-eur) and [PyPSA-USA](https://github.com/PyPSA/pypsa-usa). The workflow
 builds the model from open data and solves the plan and the least-cost system together with all scenarios,
 sensitivities and analyses (289 runs). It then summarises the results in figures, tables and key indicators. The
-processed inputs and all solved runs are archived on [Zenodo](https://doi.org/10.5281/zenodo.24037834). The
+processed inputs and all solved runs are archived on [Zenodo](https://doi.org/10.5281/zenodo.24037833). The
 [documentation](https://nautel.github.io/pypsa-vn-pdp8/) covers installation, the workflow, the configuration and the outputs.
 
 > [!WARNING]
@@ -80,7 +80,7 @@ conda env create -f workflow/envs/environment.yaml
 conda activate pypsa-vn-pdp8
 ```
 
-Unpack the [Zenodo](https://doi.org/10.5281/zenodo.24037834) archives of inputs and results into the repository root,
+Unpack the [Zenodo](https://doi.org/10.5281/zenodo.24037833) archives of inputs and results into the repository root,
 and add the GADM boundaries (see [installation](docs/installation.md)). Then:
 
 ```bash
@@ -120,11 +120,13 @@ Contributions are welcome as pull requests; see the [contribution guidelines](CO
 
 ## Citation
 
-If you use this model, its data or its results, please cite the paper and the archived release (see
-[`CITATION.cff`](CITATION.cff) and [citation](docs/citation.md)):
+If you use this model, its data or its results, please cite the archived release (see [`CITATION.cff`](CITATION.cff)
+and [citation](docs/citation.md)):
 
-> T. Le, H. C. Vu, M. Q. Duong, *Planned versus least-cost: Vietnam's power system and the revised Power Development
-> Plan VIII*, submitted to Applied Energy (2026).
+> T. Le, H. C. Vu, M. Q. Duong, *PyPSA-VN-PDP8: an open capacity-expansion model of Vietnam's power system (data,
+> results and code)*, Zenodo (2026), doi:[10.5281/zenodo.24037833](https://doi.org/10.5281/zenodo.24037833).
+
+A paper describing the model and its results is in preparation.
 
 ## Licence
 
