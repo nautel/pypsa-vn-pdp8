@@ -20,6 +20,7 @@ suppress_warnings = ["myst.xref_missing"]  # links to files outside docs/ (READM
 html_theme = "sphinx_book_theme"
 html_title = f"PyPSA-VN-PDP8 {release}"
 html_static_path = []
+html_baseurl = "https://nautel.github.io/pypsa-vn-pdp8/"
 html_theme_options = {
     "repository_url": "https://github.com/nautel/pypsa-vn-pdp8",
     "use_repository_button": True,

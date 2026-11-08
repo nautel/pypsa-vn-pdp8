@@ -1,6 +1,6 @@
 [![Release](https://img.shields.io/badge/release-v1.2.0-2c6bac.svg)](docs/release_notes.md)
 [![Test](https://github.com/nautel/pypsa-vn-pdp8/actions/workflows/test.yaml/badge.svg)](https://github.com/nautel/pypsa-vn-pdp8/actions/workflows/test.yaml)
-[![Documentation](https://img.shields.io/badge/docs-Sphinx-4b8bbe.svg)](docs/index.md)
+[![Documentation](https://github.com/nautel/pypsa-vn-pdp8/actions/workflows/docs.yaml/badge.svg)](https://nautel.github.io/pypsa-vn-pdp8/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24037834.svg)](https://doi.org/10.5281/zenodo.24037834)
 [![PyPSA](https://img.shields.io/badge/PyPSA-1.2-2c6bac.svg)](https://pypsa.org)
@@ -20,7 +20,7 @@ The model-building routines form a [Snakemake](https://snakemake.github.io) work
 builds the model from open data and solves the plan and the least-cost system together with all scenarios,
 sensitivities and analyses (289 runs). It then summarises the results in figures, tables and key indicators. The
 processed inputs and all solved runs are archived on [Zenodo](https://doi.org/10.5281/zenodo.24037834). The
-[documentation](docs/index.md) covers installation, the workflow, the configuration and the outputs.
+[documentation](https://nautel.github.io/pypsa-vn-pdp8/) covers installation, the workflow, the configuration and the outputs.
 
 > [!WARNING]
 > PyPSA-VN-PDP8 is a research model with simplifications: single reference years, a 30-region transport model,
@@ -110,7 +110,7 @@ solved with Gurobi 13. HiGHS can be selected in the configuration, but each run 
 | [Limitations](docs/limitations.md) | simplifications to keep in mind |
 | [Release notes](docs/release_notes.md) | changes between versions |
 
-The documentation can be built locally with `make docs` (Sphinx).
+The documentation is online at <https://nautel.github.io/pypsa-vn-pdp8/> and can be built locally with `make docs` (Sphinx).
 
 ## Contributing and support
 

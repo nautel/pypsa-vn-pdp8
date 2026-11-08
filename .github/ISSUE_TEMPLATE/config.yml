@@ -1,7 +1,7 @@
 blank_issues_enabled: false
 contact_links:
   - name: Documentation
-    url: https://github.com/nautel/pypsa-vn-pdp8/tree/main/docs
+    url: https://nautel.github.io/pypsa-vn-pdp8/
     about: Installation, tutorial, configuration, run set, model description and outputs.
   - name: PyPSA
     url: https://pypsa.org
